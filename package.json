@@ -1,0 +1,26 @@
+{
+    "name": "netlify-src",
+    "version": "1.0.0",
+    "description": "netlify raw source",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "netlify-lambda build src/",
+        "serve": "netlify-lambda serve src/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/conao3/netlify-src.git"
+    },
+    "keywords": ["blog"],
+    "author": "Naoya Yamashita",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/conao3/netlify-src/issues"
+    },
+    "homepage": "https://github.com/conao3/netlify-src#readme",
+    "dependencies": {
+        "moment": "^2.24.0",
+        "netlify-lambda": "^1.6.3"
+    }
+}
