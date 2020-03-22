@@ -1,5 +1,5 @@
 `(html ((lang . "en"))
    ,@(seml-import ".head.seml")
    (body nil
-     (h1 nil "Hello seml-mode!")
+     ,@(seml-import ".header.seml")
      ,@(seml-import ".script.seml")))
