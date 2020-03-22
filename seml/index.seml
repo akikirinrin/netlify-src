@@ -3,4 +3,5 @@
    (body nil
      ,@(seml-import ".header.seml")
      ,@(seml-import ".main.seml")
+     ,@(seml-import ".footer.seml")
      ,@(seml-import ".script.seml")))
