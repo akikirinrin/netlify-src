@@ -1,0 +1,3 @@
+`(html nil
+   (body nil
+     (h1 nil "Hello seml-mode!")))
