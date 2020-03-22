@@ -2,4 +2,5 @@
    ,@(seml-import ".head.seml")
    (body nil
      ,@(seml-import ".header.seml")
+     ,@(seml-import ".main.seml")
      ,@(seml-import ".script.seml")))
