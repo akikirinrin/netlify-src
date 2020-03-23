@@ -1,2 +1,5 @@
 `((header nil
-    (h1 nil "Hello seml-mode!")))
+    (div ("container")
+      (header ("blog-header")
+        (div ("col-4.pt-1")
+          (a ("text-muted" (href . "#")) "Subscribe"))))))
