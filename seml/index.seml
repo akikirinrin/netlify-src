@@ -1,7 +1,13 @@
-`(html ((lang . "en"))
-   ,@(seml-import ".head.seml")
-   (body nil
-     ,@(seml-import ".header.seml")
-     ,@(seml-import ".main.seml")
-     ,@(seml-import ".footer.seml")
-     ,@(seml-import ".script.seml")))
+(let* ((url             httpd-path)
+       (split-path      httpd-split-path)
+       (query           httpd-query)
+
+       (args            (cddr split-path)))
+  `(html ((lang . "en"))
+     ,@(seml-import ".head.seml")
+     (body nil
+       (h1 nil ,(prin1-to-string (list url split-path query)))
+       ,@(seml-import ".header.seml")
+       ,@(seml-import ".main.seml")
+       ,@(seml-import ".footer.seml")
+       ,@(seml-import ".script.seml"))))
