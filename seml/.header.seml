@@ -1,5 +1,1 @@
-`((header nil
-    (div ("container")
-      (header ("blog-header")
-        (div ("col-4.pt-1")
-          (a ("text-muted" (href . "#")) "Subscribe"))))))
+`((header nil nil))
