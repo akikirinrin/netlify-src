@@ -7,7 +7,6 @@
   `(html ((lang . "en"))
      ,@(seml-import ".head.seml")
      (body nil
-       (h1 nil ,(prin1-to-string (list url query split-path args)))
        ,@(seml-import ".header.seml")
        ,@(seml-import ".main.seml")
        ,@(seml-import ".footer.seml")
