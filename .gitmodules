@@ -1,0 +1,4 @@
+[submodule "themes/anatole-ext"]
+	path = themes/anatole-ext
+	url = git@github.com:conao3/anatole-ext.git
+	ignore = dirty
