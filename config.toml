@@ -1,0 +1,71 @@
+theme = "anatole-ext"
+baseURL = "https://lisp.netlify.app"
+languageCode = "en-us"
+title = "Hiroshima.lisp"
+enableEmoji = true
+enableInlineShortcodes = true
+enableGitInfo = true
+hasCJKLanguage = true
+googleAnalytics = "UA-165099679-2"
+
+[params]
+  author = "Hiroshima.lisp"
+  Copyright = "CC BY"
+  description = "広島大学を中心に活動するLispコミュニティ"
+
+## Social links
+[[params.socialIcons]]
+  icon = "fa-university"
+  url = "https://www.hiroshima-u.ac.jp/"
+
+[[params.socialIcons]]
+  icon = "fa-github"
+  url = "https://github.com/conao3/hiroshima.lisp"
+
+[[params.socialIcons]]
+  icon = "fa-twitter"
+  url = "https://twitter.com/hiroshimalisp"
+
+[[params.socialIcons]]
+  icon = "fa-slack"
+  url = "https://hiroshima-lisp.slack.com/join/shared_invite/enQtNjE0NTc5ODE0MTk3LThiZTM0MjVlMGY4ODQ4ZWQxZTIxZmViYmQ1NDIzN2JlYmNmNWNmOTA0N2I3ODdjMjdlYWU2MjZkZTBhZGU3OGQ"
+  style= "font-size:1.1em"
+
+[[params.socialIcons]]
+  icon = "fa-envelope"
+  url = "/blog/mail"
+  style= "font-size:0.9em"
+
+[[params.socialIcons]]
+  icon = "fa-balance-scale"
+  url = "/blog/license"
+  style= "font-size:0.8em"
+
+[params.math]
+  global = false  # options: true, false. Enable math support globally, default: false. You can always enable math on per page.
+  engine = "katex"  # options: "katex", "mathjax". default is "mathjax".
+
+[[params.css]]
+  name = "custom.css"
+
+# See https://feathericons.com/
+# The value of pre is the icon name
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Archive"
+    url = "/blog/"
+    weight = 2
+  [[menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 3
+
+[taxonomies]
+  tag = "tags"
+
+[markup.goldmark.renderer]
+  unsafe = true

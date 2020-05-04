@@ -1,2 +1,0 @@
-`((footer nil
-    (p nil ,(prin1-to-string (list :url url :query query :split-path split-path :args args)))))
