@@ -11,7 +11,7 @@ googleAnalytics = "UA-165099679-1"
 [params]
   author = "Conao3"
   Copyright = "CC BY"
-  description = "Conao3のブログ"
+  description = "Conao3's blog"
   logo = "logo.jpg"
 
 [params.math]
