@@ -2,3 +2,7 @@
 	path = themes/anatole-ext
 	url = https://github.com/conao3/anatole-ext.git
 	ignore = dirty
+[submodule "static"]
+	path = static
+	url = https://github.com/conao3/netlify-src-blob.git
+	ignore = dirty
