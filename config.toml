@@ -35,11 +35,11 @@ googleAnalytics = "UA-165099679-1"
 
 [[params.socialIcons]]
   icon = "fa-github"
-  url = "https://github.com/conao3/hiroshima.lisp"
+  url = "https://github.com/conao3/netlify-src"
 
 [[params.socialIcons]]
   icon = "fa-twitter"
-  url = "https://twitter.com/hiroshimalisp"
+  url = "https://twitter.com/conao_3"
 
 [[params.socialIcons]]
   icon = "fa-slack"
