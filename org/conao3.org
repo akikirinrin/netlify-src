@@ -1,0 +1,20 @@
+#+title: Hugo blog source
+#+author: conao3
+#+date: <2020-05-05 Tue>
+#+options: ^:{}
+
+#+hugo_base_dir: ../
+#+hugo_auto_set_lastmod: t
+
+* 2020
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: 2020
+:END:
+
+** Hugoでブログを初める第一歩
+:PROPERTIES:
+:EXPORT_FILE_NAME: hugo-first-step
+:EXPORT_DATE: 2020-05-05T00:00:00+09:00
+:END:
+
+Hugoでブログを書くことにしました。

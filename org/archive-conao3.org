@@ -1,0 +1,9 @@
+#+title:
+#+author: conao3
+#+date: <2020-05-05 Tue>
+#+options: ^:{}
+
+#+hugo_base_dir: ../
+#+hugo_section: blog
+
+* Config                                                           :noexport:
