@@ -16,11 +16,10 @@ googleAnalytics = "UA-165099679-1"
 
 [params.math]
   global = true  # options: true, false. Enable math support globally, default: false. You can always enable math on per page.
-  engine = "katex"  # options: "katex", "mathjax". default is "mathjax".
+  engine = "mathjax"  # options: "katex", "mathjax". default is "mathjax".
 
 [[params.css]]
   name = "custom.css"
-
 
 [taxonomies]
   tag = "tags"
