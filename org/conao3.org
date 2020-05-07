@@ -162,17 +162,15 @@ Netlifyで公開するならローカルでビルドする必要はないので�
 
 #+begin_src emacs-lisp
   (leaf ox-hugo
-      :doc "Hugo Markdown Back-End for Org Export Engine"
-      :req "emacs-24.4" "org-9.0"
-      :tag "docs" "markdown" "org" "emacs>=24.4"
-      :added "2020-05-05"
-      :url "https://ox-hugo.scripter.co"
-      :emacs>= 24.4
-      :ensure t
-      :after ox
-      :custom ((org-hugo-auto-set-lastmod . t)
-               (org-hugo-allow-spaces-in-tags . nil)
-               (org-hugo-front-matter-format . "yaml")))
+    :doc "Hugo Markdown Back-End for Org Export Engine"
+    :req "emacs-24.4" "org-9.0"
+    :tag "docs" "markdown" "org" "emacs>=24.4"
+    :added "2020-05-05"
+    :url "https://ox-hugo.scripter.co"
+    :emacs>= 24.4
+    :ensure t
+    :after ox
+    :custom ((org-hugo-front-matter-format . "yaml")))
 #+end_src
 
 **** orgファイル管理の方針
@@ -371,13 +369,13 @@ URLから得られる情報もありますし、後述するランダム値の�
 使用するパーマリンクを設計することができました。
 しかし、 ={{random}}= はどれだけのビット数を使い、どのようなフォーマットを使うべきでしょうか。
 
-その考察は次の記事「[[誕生日のパラドックスから考察する、ブログURLに必要なランダムビット数]]」に譲るとして、この記事ではパーマリンク設計について大きな決定ができたので、とても満足しています。
+その考察は次の記事「[[誕生日のパラドックスから考察する、個人ブログURLに必要なランダムビット数]]」に譲るとして、この記事ではパーマリンク設計について大きな決定ができたので、とても満足しています。
 
 なお、例外的に ={{base-url}}= / emacs / ={{package-name}}= というURLを使おうと思っています。
 これはるびきちさんの[[http://emacs.rubikitch.com/#outline-container-9b95cd58a36fa4354dfb22f76d9b2460][パーマリンク設計]]を踏襲しています。
 るびきちさんと同じようにEmacsのパッケージ紹介記事ではこのURLを使用しようと思います。
 
-** DONE 誕生日のパラドックスから考察する、ブログURLに必要なランダムビット数
+** DONE 誕生日のパラドックスから考察する、個人ブログURLに必要なランダムビット数
 CLOSED: [2020-05-07 Thu 15:53]
 :PROPERTIES:
 :EXPORT_FILE_NAME: 2020-28cb-467d
@@ -457,7 +455,7 @@ Aさんを含め、n人がいる。一年を365日とし、誕生日は全ての
 
    $n_\text{min2}$ については面倒なので、Pythonを用いて図示する。
 
-   #+begin_src python :exports both :session py1 :cache yes :file ../static/files/65d26e9c-99a3-411c-9dbf-047dcd474d5c.png
+   #+begin_src python :exports both :session py :cache yes :file ../static/files/65d26e9c-99a3-411c-9dbf-047dcd474d5c.png
      import matplotlib.pyplot as plt
      import numpy as np
 
@@ -502,7 +500,7 @@ Aさんを含め、n人がいる。一年を365日とし、誕生日は全ての
          plt.show()
    #+end_src
 
-   #+RESULTS:
+   #+RESULTS[3b78140d80ab9b21fd375a121371836422dab596]:
    [[file:../static/files/65d26e9c-99a3-411c-9dbf-047dcd474d5c.png]]
 
    グラフから、 $n_{min2} = 23$ 。
@@ -591,7 +589,7 @@ $2^{32} = (42.9\text{億})$ 個([[https://www.wolframalpha.com/input/?i=2%5E%283
 
 長々書いてきましたが、数学的な裏付けのもとで必要なランダムビット数が分かり、パーマリンクのフォーマットを決めることができました。
 
-次の記事「」ではこのフォーマットを実現するためのox-hugoの運用について書きたいと思います。
+次の記事「[[ox-hugo用のorg-captureテンプレートについて]]」ではこのフォーマットを実現するためのox-hugoの運用について書きたいと思います。
 
 *** 参考
 - [[https://ja.wikipedia.org/wiki/%E8%AA%95%E7%94%9F%E6%97%A5%E3%81%AE%E3%83%91%E3%83%A9%E3%83%89%E3%83%83%E3%82%AF%E3%82%B9][誕生日のパラドックス - Wikipedia]]
@@ -600,16 +598,110 @@ $2^{32} = (42.9\text{億})$ 個([[https://www.wolframalpha.com/input/?i=2%5E%283
 - [[https://qiita.com/ta_ta_ta_miya/items/1f8f71db3c1bf2dfb7ea][UUID(v4) がぶつかる可能性を考えなくていい理由 - Qiita]]
 - [[https://tex2e.github.io/blog/crypto/birthday-attack][誕生日攻撃 (Birthday Attack) - 晴耕雨読]]
 
-** TODO ox-hugo用のorg-captureテンプレートについて
+** DONE ox-hugo用のorg-captureテンプレートについて
+CLOSED: [2020-05-07 Thu 18:53]
 :PROPERTIES:
 :EXPORT_FILE_NAME: 2020-1049-5b91
-:EXPORT_HUGO_TAGS: org ox-hugo org-capture permalink meta
+:EXPORT_HUGO_TAGS: org ox-hugo org-capture permalink meta transient-dwim
 :EXPORT_HUGO_LASTMOD:
 :END:
-*** 
+*** tl;dr
+- 記事新規作成のために必要な情報が揃った
+- ox-hugo用のorg-captureテンプレートが必要
+- テンプレートを用意したので、いつでもブログが気軽に書けるようになった
+
+*** Intro
+下記のブログの記事で考えて、ようやく記事を新規作成するために必要な情報が整いました。
+
+- 「[[Netlify + Hugo + ox-hugoでブログを初める第一歩]]」
+- 「[[個人ブログのパーマリンクに関する最適戦略について]]」
+- 「[[誕生日のパラドックスから考察する、個人ブログURLに必要なランダムビット数]]」
+
+org-captureはいつも設定しておきながら、設定したことを忘れているのですが、ox-hugoを使うにあたってきちんと入門したいと思います。
+
+*** org-capture
+[[https://orgmode.org/org.html#Capture-and-Attachments-1][org-capture]]はEmacsのどこにいてもorgでメモを取るためのフロントエンドです。
+
+org-captureのユーザーはたくさんおり、設定例も溢れていますが、
+「自分でグローバルバインドを設定しなければならない」という点が性に合わず、結局使わずじまいでした。
+
+少し本題からずれますが、そもそも =C-c= につづくアルファベット、修飾キー付きのアルファベット、プレフィックスを自由に設定できるとして、覚えられる気がしません。
+
+私のglobal-mapは[[https://github.com/conao3/transient-dwim.el][transient-dwim]]だけを設定しており、他のバインドはマイナーモード、メジャーモードのキーマップのみです。
+transient-dwimは[[https://github.com/magit/transient][transient]]を利用したキーバインド管理パッケージです。
+
+transient-dwimを =M-== に設定している場合、org-captureは =M-== =M-o M-o= で起動できます。
+
+[[files:1e21eb45-e047-40f2-bccd-63683857ec8d.gif]]
+
+*** ox-hugoの設定
+「[[https://pxaka.tokyo/blog/2018/44febe88-04a5-9bc4-6bfb-678a8477a0ed/][ファイル名をUUIDで自動生成するテスト - IMADENELE]]」と「[[https://pxaka.tokyo/blog/2018/58e5bcee-1fb9-48a4-628b-a80692983bfe/][最終変更日の手動設定 - IMADENELE]]」を参考にテンプレートを調整しました。
+
+#+begin_src emacs-lisp
+  (leaf ox-hugo
+    :doc "Hugo Markdown Back-End for Org Export Engine"
+    :req "emacs-24.4" "org-9.0"
+    :tag "docs" "markdown" "org" "emacs>=24.4"
+    :added "2020-05-05"
+    :url "https://ox-hugo.scripter.co"
+    :emacs>= 24.4
+    :ensure t
+    :after org
+    :require t
+    :defun (org-set-property)
+    :custom ((org-hugo-front-matter-format . "yaml"))
+    :config
+    (defun c/ox-hugo-add-lastmod nil
+      "Add `lastmod' property with the current time."
+      (interactive)
+      (org-set-property "EXPORT_HUGO_LASTMOD"
+                        (format-time-string "[%Y-%m-%d %a %H:%M]")))
+
+    (leaf *ox-hugo--capture
+      :require org-capture
+      :defvar (org-capture-templates)
+      :config
+      (add-to-list 'org-capture-templates
+                   '("b" "Create new blog post" entry
+                     (file+headline "~/dev/repos/netlify-src/org/conao3.org" "blog")
+                     "** TODO %?
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: %(apply #'format \"%s-%s-%s\"
+          (format-time-string \"%Y\")
+          (let ((sha1 (sha1 (shell-command-to-string \"head -c 1k /dev/urandom\"))))
+            (cl-loop for (a b c d) on (cdr (split-string sha1 \"\")) by #'cddddr repeat 2 collect (concat a b c d))))
+  :EXPORT_HUGO_TAGS:
+  :EXPORT_HUGO_LASTMOD:
+  :END:
+  "))
+      (add-to-list 'org-capture-templates
+                   '("p" "Create new package post" entry
+                     (file+headline "~/dev/repos/netlify-src/org/conao3.org" "emacs")
+                     "** TODO %?
+  :PROPERTIES:
+  :EXPORT_FILE_NAME:
+  :EXPORT_HUGO_TAGS: emacs
+  :EXPORT_HUGO_LASTMOD:
+  :END:
+  "))))
+#+end_src
+
+=p= はパッケージの紹介用で =emacs= ツリー以下に展開されます。
+
+=b= は簡単なブログ用で =:EXPORT_FILE_NAME= は「[[誕生日のパラドックスから考察する、個人ブログURLに必要なランダムビット数]]」をもとに8桁の16進数を使って自動生成します。
+
+8桁の16進数は =/dev/urandom= から1KB読んで、それのsha1の先頭8桁のみを取ることにしました。
+この乱数は衝突するときわめて面倒なことになるので、できるだけ均質なランダム値を得る必要があります。
+この仕組みを作った後は衝突しないことをもう祈るしかない。。(もし衝突すると単に新しい記事で古い記事が上書きされて、特に警告は出ない。。)
+
+*** まとめ
+org-captureの設定をすることによってブログ記事を書くハードルがとても下がりました。
+
+これから情報発信に努めていきたいと思います!
+
 ** TODO Arch Linuxでいい感じに揃ったスクリーンショットを撮り、管理する方法
 :PROPERTIES:
-:EXPORT_FILE_NAME: 2020-1049-5b91
+:EXPORT_FILE_NAME: 2020-24b5-a488
 :EXPORT_HUGO_TAGS: arch xfce
 :EXPORT_HUGO_LASTMOD:
 :END:
