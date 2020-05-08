@@ -1,12 +1,13 @@
 theme = "anatole-ext"
 baseURL = "https://conao3.com/"
-languageCode = "en-us"
+languageCode = "en"
 title = "Conao3 Note"
 enableEmoji = true
 enableInlineShortcodes = true
 enableGitInfo = true
 hasCJKLanguage = true
 googleAnalytics = "UA-165099679-1"
+sectionPagesMenu = "main"
 
 [params]
   author = "Conao3"
@@ -15,7 +16,7 @@ googleAnalytics = "UA-165099679-1"
   logo = "logo.jpg"
 
 [params.math]
-  global = true  # options: true, false. Enable math support globally, default: false. You can always enable math on per page.
+  global = false  # options: true, false. Enable math support globally, default: false. You can always enable math on per page.
   engine = "mathjax"  # options: "katex", "mathjax". default is "mathjax".
 
 [[params.css]]
@@ -59,14 +60,14 @@ googleAnalytics = "UA-165099679-1"
 # The value of pre is the icon name
 [menu]
   [[menu.main]]
-    name = "Home"
-    url = "/"
-    weight = 1
-  [[menu.main]]
+    identifier = "blog"
     name = "Archive"
-    url = "/blog/"
-    weight = 2
+    weight = 1
   [[menu.main]]
     name = "Tags"
     url = "/tags/"
-    weight = 3
+    weight = 2
+  [[menu.main]]
+    name = "About"
+    url = "/about"
+    weight = 100
