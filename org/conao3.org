@@ -7,12 +7,6 @@
 
 #+link: files file+sys:../static/files/
 
-# (insert (format-time-string "[%Y-%m-%d %a %H:%M]"))
-
-# (let ((sha1 (string-trim (shell-command-to-string "head -c 1k /dev/random | openssl sha1 | awk '{print $2}'"))))
-#   (cl-loop for (a b c d) on (cdr (split-string sha1 "")) by #'cddddr
-#            collect (concat a b c d)))
-
 * blog
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: blog
