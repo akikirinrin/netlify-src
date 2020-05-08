@@ -54,11 +54,6 @@ CLOSED: [2020-05-05 Tue 22:52]
 :EXPORT_HUGO_TAGS: meta hugo ox-hugo
 :EXPORT_HUGO_LASTMOD: [2020-05-05 Tue 16:20]
 :END:
-*** tl;dr
-- Netlify + Hugo + ox-hugoでブログを書くことにしました
-- 多少の方針決定とコーディングが必要になりましたが、快適なブログ執筆環境が整いました
-- Netlify + Hugo + ox-hugoはいいぞ
-
 *** Intro
 HTMLジェネレータの[[https://github.com/conao3/seml-mode.el][seml-mode.el]]とOrg->HTMLジェネレータ拡張の[[https://github.com/conao3/orglyth.el][orglyth.el]]を作っていて、自分のブログくらいはそれらを使って構築しようと思っていました。
 
@@ -253,11 +248,6 @@ CLOSED: [2020-05-06 Wed 22:52]
 :EXPORT_HUGO_TAGS: meta seo permalink
 :EXPORT_HUGO_LASTMOD:
 :END:
-*** tl;dr
-- 個人ブログにおけるパーマリンクはどのように設計するべきなのでしょうか
-- SEOやURLシェアの観点から、「強いキーワード」を含む、短かいパーマリンクが好まれる
-- しかし、サイト中でのURL衝突が面倒なのでランダム値で自動生成することにした
-
 *** Intro
 Webで情報を公開するにあたって、パーマリンクの設計は将来に渡って重要なものです。
 
@@ -481,16 +471,16 @@ Aさんを含め、n人がいる。一年を365日とし、誕生日は全ての
      with plt.style.context(('science-transparent')):
          y = [Pn(i) for i in range(n)]
          plt.plot(y)
-     
+
          plt.xlabel('n')
          plt.ylabel('P_n')
-     
+
          plt.axhline(0.5, color='C1')
          n_min2 = np.searchsorted(y, 0.5)
          plt.annotate('({}, {:.2f})'.format(n_min2, y[n_min2]),
                       (n_min2, y[n_min2]), (n_min2-15, 0.8),
                       arrowprops = dict(arrowstyle='-|>', mutation_scale=20))
-     
+
          plt.show()
    #+end_src
 
@@ -599,11 +589,6 @@ CLOSED: [2020-05-07 Thu 18:53]
 :EXPORT_HUGO_TAGS: org ox-hugo org-capture permalink meta transient-dwim
 :EXPORT_HUGO_LASTMOD:
 :END:
-*** tl;dr
-- 記事新規作成のために必要な情報が揃った
-- ox-hugo用のorg-captureテンプレートが必要
-- テンプレートを用意したので、いつでもブログが気軽に書けるようになった
-
 *** Intro
 下記のブログの記事で考えて、ようやく記事を新規作成するために必要な情報が整いました。
 
@@ -724,3 +709,9 @@ $$\div a$$
 $$\sin(\frac{a}{b})$$
 
 $$a \between b$$
+** TODO VMにArch Linux入れて初期設定するまで
+:PROPERTIES:
+:EXPORT_FILE_NAME: 2020-5ad5-b51c
+:EXPORT_HUGO_TAGS: arch vm virtual-box
+:EXPORT_HUGO_LASTMOD:
+:END:
