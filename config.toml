@@ -14,6 +14,7 @@ sectionPagesMenu = "main"
   Copyright = "CC BY"
   description = "Conao3's blog"
   logo = "logo.jpg"
+  showArticleAuthors = false
 
 [params.math]
   global = false  # options: true, false. Enable math support globally, default: false. You can always enable math on per page.
