@@ -60,13 +60,17 @@ sectionPagesMenu = "main"
 # The value of pre is the icon name
 [menu]
   [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
     identifier = "blog"
     name = "Archive"
-    weight = 1
+    weight = 2
   [[menu.main]]
     name = "Tags"
     url = "/tags/"
-    weight = 2
+    weight = 3
   [[menu.main]]
     name = "About"
     url = "/about"
