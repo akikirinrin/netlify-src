@@ -374,7 +374,7 @@ CLOSED: [2020-05-07 Thu 15:53]
 :PROPERTIES:
 :EXPORT_FILE_NAME: 2020-28cb-467d
 :EXPORT_HUGO_TAGS: math stat permalink
-:EXPORT_HUGO_LASTMOD:
+:EXPORT_HUGO_LASTMOD: [2020-05-08 Fri 23:13]
 :END:
 *** tl;dr
 - ブログのURLにランダム値を使うとして、必要なビット数は何桁だろうか
@@ -421,7 +421,7 @@ Aさんを含め、n人がいる。一年を365日とし、誕生日は全ての
    Aさん以外の人は $\frac{364}{365}$ の確率でAさんの誕生日と衝突しない。
    Aさん以外の人は $n-1$ 人存在するので、
 
-   $$ P_1 = 1 - \left(\frac{364}{365}\right)^{n-1} $$
+   $$ P_1 = 1 - (\frac{364}{365})^{n-1} $$
 
 2. 同じ誕生日の人が存在する確率 $P_2$
 
@@ -438,9 +438,9 @@ Aさんを含め、n人がいる。一年を365日とし、誕生日は全ての
    $n_\text{min1}$ については計算できる。
 
    \begin{aligned}
-     P_1 = 1 - \left(\frac{364}{365}\right)^{n-1} &> 0.5 \\
-     0.5 &> \left(\frac{364}{365}\right)^{n-1} \\
-     \log_2(0.5) &> (n-1)\log_2\left(\frac{364}{365}\right) \\
+     P_1 = 1 - \qty(\frac{364}{365})^{n-1} &> 0.5 \\
+     0.5 &> \qty(\frac{364}{365})^{n-1} \\
+     \log_2(0.5) &> (n-1)\log_2\qty(\frac{364}{365}) \\
      -1 &> (n-1)(-0.003958) \\
      253.65 &< n
    \end{aligned}
@@ -449,7 +449,7 @@ Aさんを含め、n人がいる。一年を365日とし、誕生日は全ての
 
    $n_\text{min2}$ については面倒なので、Pythonを用いて図示する。
 
-   #+begin_src python :exports both :session py :cache yes :file ../static/files/65d26e9c-99a3-411c-9dbf-047dcd474d5c.png
+   #+begin_src python
      import matplotlib.pyplot as plt
      import numpy as np
 
@@ -514,8 +514,8 @@ Aさんを含め、n人がいる。一年を365日とし、誕生日は全ての
 
 \begin{aligned}
   p &= 1 - \frac{N-1}{N}\cdot\frac{N-2}{N}\cdot\frac{N-3}{N}\cdots\frac{N-(n-1)}{N} \\
-    &= 1 - \left(\left(1-\frac{1}{N}\right)\left(1-\frac{2}{N}\right)\left(1-\frac{3}{N}\right)\left(1-\frac{n-1}{N}\right)\right) \\
-    &= 1 - \prod_{m=1}^{n-1}\left(1-\frac{m}{N}\right)
+    &= 1 - \qty(\qty(1-\frac{1}{N})\qty(1-\frac{2}{N})\qty(1-\frac{3}{N})\qty(1-\frac{n-1}{N})) \\
+    &= 1 - \prod_{m=1}^{n-1}\qty(1-\frac{m}{N})
 \end{aligned}
 
 ここで、ネイピア数のテイラー展開は次の形です。 $x$ が十分小さいときは1次までの近似が使えます。
@@ -528,20 +528,20 @@ Aさんを含め、n人がいる。一年を365日とし、誕生日は全ての
 $N$ はランダム値の全体総数なので、 $\frac{i}{N}$ は十分小さく、ネイピア数のテイラー展開から近似を使えます。
 
 \begin{aligned}
-  p = 1 - \prod_{m=1}^{n-1}\left(1-\frac{1}{N}m\right) &\approx 1 - \prod_{m=1}^{n-1}\exp\left(-\frac{1}{N}m\right) \\
-   &= 1 - \exp\left(\sum_{m=1}^{n-1}\left(-\frac{m}{N}\right)\right) \\
-   &= 1 - \exp\left(-\frac{1}{N}\sum_{m=1}^{n-1}m\right) \\
-   &= 1 - \exp\left(-\frac{n(n-1)}{2N}\right)
+  p = 1 - \prod_{m=1}^{n-1}\qty(1-\frac{1}{N}m) &\approx 1 - \prod_{m=1}^{n-1}\exp\qty(-\frac{1}{N}m) \\
+   &= 1 - \exp\qty(\sum_{m=1}^{n-1}\qty(-\frac{m}{N})) \\
+   &= 1 - \exp\qty(-\frac{1}{N}\sum_{m=1}^{n-1}m) \\
+   &= 1 - \exp\qty(-\frac{n(n-1)}{2N})
 \end{aligned}
 
 さらに $n$ について変形します。途中、 $n$ が十分大きいことから、定数の減算を無視しました。
 
 \begin{aligned}
-  \exp\left(-\frac{n(n-1)}{2N}\right) &= 1-p \\
+  \exp\qty(-\frac{n(n-1)}{2N}) &= 1-p \\
   -\frac{n(n-1)}{2N} &= \ln(1-p) \\
   n(n-1) &= -2N\ln(1-p) \\
-  n^2 &\approx 2N\ln\left(\frac{1}{1-p}\right) \\
-  n &= \sqrt{2N\ln\left(\frac{1}{1-p}\right)}
+  n^2 &\approx 2N\ln\qty(\frac{1}{1-p}) \\
+  n &= \sqrt{2N\ln\qty(\frac{1}{1-p})}
 \end{aligned}
 
 *** 数値計算
@@ -550,7 +550,7 @@ $N$ はランダム値の全体総数なので、 $\frac{i}{N}$ は十分小さ�
 なお $p=0.5$ とします。
 
 \begin{aligned}
-  n = \sqrt{2N\ln\left(\frac{1}{1-0.5}\right)} &= \sqrt{2N\ln2} \\
+  n = \sqrt{2N\ln\qty(\frac{1}{1-0.5})} &= \sqrt{2N\ln2} \\
    &\approx 1.1774\sqrt{N} \\
    &\approx \sqrt{N}
 \end{aligned}
