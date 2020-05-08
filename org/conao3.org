@@ -449,7 +449,7 @@ Aさんを含め、n人がいる。一年を365日とし、誕生日は全ての
 
    $n_\text{min2}$ については面倒なので、Pythonを用いて図示する。
 
-   #+begin_src python
+   #+begin_src python :exports both :cache yes :file ../static/files/65d26e9c-99a3-411c-9dbf-047dcd474d5c.png
      import matplotlib.pyplot as plt
      import numpy as np
 
@@ -494,7 +494,7 @@ Aさんを含め、n人がいる。一年を365日とし、誕生日は全ての
          plt.show()
    #+end_src
 
-   #+RESULTS[3b78140d80ab9b21fd375a121371836422dab596]:
+   #+RESULTS[9b7db4cfadb9c6344f9aabc0f5f93ac602d758b1]:
    [[file:../static/files/65d26e9c-99a3-411c-9dbf-047dcd474d5c.png]]
 
    グラフから、 $n_{min2} = 23$ 。
