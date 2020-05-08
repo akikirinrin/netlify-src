@@ -1,6 +1,6 @@
 #+title: Hugo blog source
 #+author: conao3
-#+date: <2100-01-01 Fri>
+#+date: <2020-01-01 Wed>
 #+options: ^:{}
 
 #+hugo_base_dir: ../
@@ -701,3 +701,26 @@ org-captureの設定をすることによってブログ記事を書くハード
 :END:
 
 [[Netlify + Hugo + ox-hugoでブログを初める第一歩]]
+** TODO Test
+:PROPERTIES:
+:EXPORT_FILE_NAME: 2020-db11-3deb
+:EXPORT_HUGO_TAGS: math
+:EXPORT_HUGO_LASTMOD:
+:END:
+test test test
+
+test test test
+
+平方根の高さを揃える $\sqrt{g}$ に \$\sqrt{h}$ は \mathstrut と \smash コマンドを使って $\ssqrt{g}$ と $\ssqrt{h}$ のように表示できる。
+
+test
+
+$$a$$
+
+$$\RR$$
+
+$$\div a$$
+
+$$\sin(\frac{a}{b})$$
+
+$$a \between b$$
