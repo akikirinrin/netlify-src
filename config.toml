@@ -7,7 +7,6 @@ enableInlineShortcodes = true
 enableGitInfo = true
 hasCJKLanguage = true
 googleAnalytics = "UA-165099679-1"
-sectionPagesMenu = "main"
 
 [params]
   author = "Conao3"
@@ -65,7 +64,6 @@ sectionPagesMenu = "main"
     url = "/"
     weight = 1
   [[menu.main]]
-    identifier = "blog"
     url = "/blog/"
     name = "Archive"
     weight = 2
@@ -73,6 +71,10 @@ sectionPagesMenu = "main"
     name = "Tags"
     url = "/tags/"
     weight = 3
+  [[menu.main]]
+    name = "Search"
+    url = "/search/"
+    weight = 4
   [[menu.main]]
     name = "About"
     url = "/about"
