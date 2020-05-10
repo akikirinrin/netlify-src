@@ -216,7 +216,7 @@ filesのlinkは「[[https://pxaka.tokyo/blog/2018/a-test-of-images/][画像の�
 
 - Output
   #+begin_src markdown
-    \{\{< figure src="/files/logo.jpg" width="128px" >\}\}
+    {{</* figure src="/files/logo.jpg" width="128px" */>}}
   #+end_src
 
 - Rendering
