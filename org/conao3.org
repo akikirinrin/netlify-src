@@ -971,13 +971,84 @@ yellow orange red magenta violet blue cyan green
 
 ぜひ独創的かつ目にやさしいカラーテーマを作っていただき、日々のEmacs生活がよりよりものになれば良いなと思っています。
 
-** TODO Archのrsyncdでなぜか転送できないときに確認すること
+** DONE Archのrsyncでなぜか転送できないときに確認すること
+CLOSED: [2020-05-11 Mon 03:50]
 :PROPERTIES:
 :EXPORT_FILE_NAME: 2020-3c1e-7801
-:EXPORT_HUGO_TAGS:
+:EXPORT_HUGO_TAGS: arch rsync github_actions
 :EXPORT_HUGO_LASTMOD:
 :END:
--aオプション。
+
+*** Intro
+[[http://celpa.conao3.com/][celpa.conao3.com]]は私が契約している100GBの「さくらのレンタルサーバー」を向いているのだけど、その公開ディレクトリにGitHub Actionsからrsyncでデプロイしたい。
+
+もちろん、GitHubのワーカーに秘密鍵をアップロードすることになるので、その秘密鍵は上手い具合に制限を設ける必要があります。
+
+ローカルで試していたとき上手くいかなかったので、そのメモ。
+
+*** 普通のrsync
+rsyncは接続先のサーバーにrsyncを起動して、そのプロセスと通信します。
+
+どんなコマンドが実行されているかは =-vvv= オプションを付けることで表示されます。
+
+#+begin_src shell
+  $ rsync -vvv -an README.md conao3@conao3.sakura.ne.jp:/home/conao3/
+  opening connection using: ssh -l conao3 conao3.sakura.ne.jp rsync --server -vvvnlogDtpre.iLsfxC . /home/conao3/  (9 args)
+  sending incremental file list
+  [sender] make_file(README.md,*,0)
+  ...
+
+  sent 60 bytes  received 368 bytes  285.33 bytes/sec
+  total size is 15,379  speedup is 35.93 (DRY RUN)
+  [sender] _exit_cleanup(code=0, file=main.c, line=1189): about to call exit(0) (DRY RUN)
+#+end_src
+
+=opening connection using= の行の =rsync= 以降が接続先で実行されているコマンドです。
+
+そのため、そのコマンドだけ実行できる鍵を登録するには以下のように =authorized_keys= に登録します。 (=-vvv= はいらないので削る)
+
+#+begin_src fundamental
+command="rsync --server -nlogDtpre.iLsfxC . /home/conao3/",no-port-forwarding,no-X11-forwarding,no-agent-forwarding ssh-rsa AAAA...
+#+end_src
+
+*** rsyncdを使ったrsync
+**** 鍵の作成
+rsync用の鍵を新しく作る。
+GitHub Actionsのsshが古く、Openssh形式の秘密鍵が読めなかったのでPEM形式で出力するようにオプションを付けた。
+
+鍵の名前は =sakura-rsync_rsa= と入力した。
+
+#+begin_src shell
+  cd .ssh
+  ssh-keygen -t rsa -b 4096 -m PEM -C ""
+#+end_src
+
+**** 鍵の登録
+ファイルをやりとりしたいサーバーにログインし、 =authorized_keys= に公開鍵 =sakura-rsync_rsa.pub= を登録する。
+
+#+begin_src fundamental
+  command="rsync --server --daemon --config=/home/conao3/.rsyncd.conf .",no-port-forwarding,no-X11-forwarding,no-agent-forwarding ssh-rsa AAAA...
+#+end_src
+
+**** rsyncd.confの作成
+私が使っているのは共有サーバーなので、当然、ユーザーホーム以下しか触れない。
+そのため =rsyncd.conf= は =~/.rsyncd.conf= に作成することにしました。
+
+#+begin_src conf
+  use chroot = no
+  read only = false
+  
+  [www]
+    read only = yes
+    path = /home/conao3/www
+  
+  [cache]
+    read only = no
+    path = /home/conao3/www/files/cache-40bbae27
+#+end_src
+
+**** 使ってみる
+なぜかファイル転送されない。。。
 #+begin_src shell
 $ rsync -vvv -e "ssh -i sakura-rsync_rsa" /home/conao/dev/template/elisp conao3@conao3.sakura.ne.jp::foo/
 opening connection using: ssh -i sakura-rsync_rsa -l conao3 conao3.sakura.ne.jp rsync --server --daemon .  (10 args)
@@ -995,6 +1066,7 @@ total size is 0  speedup is 0.00
 [sender] _exit_cleanup(code=0, file=main.c, line=1189): about to call exit(0)
 #+end_src
 
+=-a= オプションを付けると転送された。
 #+begin_src shell
 $ rsync -a -vvv -e "ssh -i sakura-rsync_rsa" /home/conao/dev/template/elisp conao3@conao3.sakura.ne.jp::foo
 opening connection using: ssh -i sakura-rsync_rsa -l conao3 conao3.sakura.ne.jp rsync --server --daemon .  (10 args)
@@ -1014,7 +1086,81 @@ send_file_list done
 [sender] make_file(elisp/Cask,*,2)
 send_files starting
 #+end_src
-https://jyn.jp/rsync-daemon-over-ssh/
+
+**** GitHub Actionsから使う。
+こんなファイルを =.github/workflows/test.yml= に保存すればできる。
+
+「[[https://qiita.com/shimataro999/items/b05a251c93fe6843cc16][GitHub ActionsでSSHを使う - Qiita]]」で紹介されていた =shimataro/ssh-key-action= を使わせてもらいました。
+
+#+begin_src yaml
+  name: Main workflow
+  on:
+    push:
+      branches:
+        - master
+    pull_request:
+      branches:
+        - master
+
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          emacs_version:
+            - '26.3'
+      steps:
+        - uses: actions/checkout@v1
+        - uses: actions/setup-python@v1.1.1
+        - uses: purcell/setup-emacs@master
+          with:
+            version: ${{ matrix.emacs_version }}
+        - uses: conao3/setup-cask@master
+        - name: Install SSH key
+          uses: shimataro/ssh-key-action@v1
+          with:
+            private-key: ${{ secrets.SSH_KEY }}
+            public-key: ${{ secrets.SSH_KEY_PUBLIC }}
+            known-hosts: ${{ secrets.KNOWN_HOSTS }}
+
+        - name: Cache fetch
+          run: |
+            rsync -av --progress -e 'ssh' conao3@conao3.sakura.ne.jp::cache/celpa.tar.gz /tmp/
+            rm -rf working
+            tar xf /tmp/celpa.tar.gz
+
+        - name: Build
+          run: |
+            make
+
+        - name: Deploy
+          run: |
+            rsync -av -e 'ssh' --delete --exclude=working ./ conao3@conao3.sakura.ne.jp::www/celpa/
+
+        - name: Cache push
+          run: |
+            rm /tmp/celpa.tar.gz
+            tar czf /tmp/celpa.tar.gz working
+            rsync -av --progress -e 'ssh' /tmp/celpa.tar.gz conao3@conao3.sakura.ne.jp::cache/
+#+end_src
+
+*** まとめ
+rsyncを使ってサイトをGitHub Actionsからデプロイできるようになりました。
+
+なぜ =-a= がないと転送できなかったのかは分からずじまい。。
+
+*** 参考
+- [[https://jyn.jp/rsync-daemon-over-ssh/][rsync+sshはdaemonモードを使うと更に安全になる - 純規の暇人趣味ブログ]]
+- [[https://qiita.com/shimataro999/items/b05a251c93fe6843cc16][GitHub ActionsでSSHを使う - Qiita]]
+- [[https://amasuda.xyz/post/2019-07-27-ssh-keygen-openssh-to-pem/][ssh-keygen で生成された OPENSSH フォーマットの秘密鍵を pem フォーマットへ変換する - Think Abstract]]
+- [[https://machua.hatenadiary.org/entry/20110809/1312899353][SSHの秘密鍵について - 禿散らかしてました]]
+
+** TODO CELPA (Colortheme Emacs Lisp Package Archive) をデプロイした話
+:PROPERTIES:
+:EXPORT_FILE_NAME: 2020-d384-6424
+:EXPORT_HUGO_TAGS: emacs celpa
+:EXPORT_HUGO_LASTMOD:
+:END:
 * man
 ** TODO スクリーンショットコマンドscrot(1)のオプションと使い方
 :PROPERTIES:
