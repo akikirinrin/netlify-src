@@ -1087,7 +1087,7 @@ send_file_list done
 send_files starting
 #+end_src
 
-**** GitHub Actionsから使う。
+**** GitHub Actionsから使う
 こんなファイルを =.github/workflows/test.yml= に保存すればできる。
 
 「[[https://qiita.com/shimataro999/items/b05a251c93fe6843cc16][GitHub ActionsでSSHを使う - Qiita]]」で紹介されていた =shimataro/ssh-key-action= を使わせてもらいました。
