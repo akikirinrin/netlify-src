@@ -7,6 +7,8 @@ enableInlineShortcodes = true
 enableGitInfo = true
 hasCJKLanguage = true
 googleAnalytics = "UA-165099679-1"
+pygmentsUseClasses = true
+pygmentsStyle = "monokai"
 
 [params]
   author = "Conao3"
@@ -21,6 +23,8 @@ googleAnalytics = "UA-165099679-1"
 
 [[params.css]]
   name = "custom.css"
+[[params.css]]
+  name = "syntax.css"
 
 [taxonomies]
   tag = "tags"
