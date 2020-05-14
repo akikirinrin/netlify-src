@@ -1036,14 +1036,12 @@ GitHub Actionsのsshが古く、Openssh形式の秘密鍵が読めなかった�
 
 #+begin_src conf
   use chroot = no
-  read only = false
   
   [www]
-    read only = yes
+    write only = yes
     path = /home/conao3/www
   
   [cache]
-    read only = no
     path = /home/conao3/www/files/cache-40bbae27
 #+end_src
 
@@ -1171,3 +1169,11 @@ rsyncを使ってサイトをGitHub Actionsからデプロイできるように�
 | Short | Long | Description |
 |-------+------+-------------|
 |       |      |             |
+* doc
+** TODO leaf.el - Flexible, declarative and modern init.el package configuration
+:PROPERTIES:
+:EXPORT_FILE_NAME: leaf
+:EXPORT_HUGO_TAGS:
+:EXPORT_HUGO_LASTMOD:
+:END:
+leaf
