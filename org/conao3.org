@@ -488,9 +488,9 @@ Aさんを含め、n人がいる。一年を365日とし、誕生日は全ての
    #+RESULTS[9b7db4cfadb9c6344f9aabc0f5f93ac602d758b1]:
    [[file:../static/files/65d26e9c-99a3-411c-9dbf-047dcd474d5c.png]]
 
-   グラフから、 $n_{min2} = 23$ 。
+   グラフから、 $n_\text{min2} = 23$ 。
 
-上記のとおり $n_{min1} = 254$, $n_{min2} = 23$ となり $P_{min2}$ は直感よりも少ないように思います。
+上記のとおり $n_\text{min1} = 254$, $n_\text{min2} = 23$ となり $P_\text{min2}$ は直感よりも少ないように思います。
 
 直感との乖離の理由は「自分と同じ誕生日の人が存在する確率」と「同じ誕生日の組が存在する確率」を混同してしまうからです。
 
@@ -1161,6 +1161,13 @@ rsyncを使ってサイトをGitHub Actionsからデプロイできるように�
 :EXPORT_HUGO_TAGS: emacs celpa
 :EXPORT_HUGO_LASTMOD:
 :END:
+** TODO Emacsで競技プログラミング界へ飛び込め! ojのラッパーパッケージを書いた話
+:PROPERTIES:
+:EXPORT_FILE_NAME: 2020-db66-daf0
+:EXPORT_HUGO_TAGS: emacs oj
+:EXPORT_HUGO_LASTMOD:
+:END:
+test
 * man
 ** TODO スクリーンショットコマンドscrot(1)のオプションと使い方
 :PROPERTIES:
